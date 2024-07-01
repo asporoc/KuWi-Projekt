@@ -32,11 +32,11 @@ public class QuizManager : MonoBehaviour
 
     void SetupQuiz()
     {
-        questionText.text = "What is the capital of France?";
-        optionButtons[0].GetComponentInChildren<TMP_Text>().text = "Berlin";
-        optionButtons[1].GetComponentInChildren<TMP_Text>().text = "Paris";
-        optionButtons[2].GetComponentInChildren<TMP_Text>().text = "Madrid";
-        optionButtons[3].GetComponentInChildren<TMP_Text>().text = "Madrid";
+        //questionText.text = "What is the capital of France?";
+        //optionButtons[0].GetComponentInChildren<TMP_Text>().text = "Berlin";
+        //optionButtons[1].GetComponentInChildren<TMP_Text>().text = "Paris";
+        //optionButtons[2].GetComponentInChildren<TMP_Text>().text = "Madrid";
+        //optionButtons[3].GetComponentInChildren<TMP_Text>().text = "Madrid";
 
         // Assign button click events
         optionButtons[0].onClick.AddListener(() => OnOptionSelected(false));

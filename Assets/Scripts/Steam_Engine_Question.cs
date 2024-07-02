@@ -1,11 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class QuizManager : MonoBehaviour
 {
     public GameObject quizPanel;
-    public TMP_Text questionText;
     public Button[] optionButtons;
     public GameObject[] models; 
     private Renderer[] modelRenderers;
@@ -20,9 +18,6 @@ public class QuizManager : MonoBehaviour
         for (int i = 0; i < models.Length; i++)
         {
             modelRenderers[i] = models[i].GetComponentInChildren<MeshRenderer>();
-            Color color = modelRenderers[i].material.color;
-            color.a = 0;
-            modelRenderers[i].material.color = color;
             SetAlpha(modelRenderers[i], 0);
             
         }

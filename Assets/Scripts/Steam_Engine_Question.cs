@@ -7,9 +7,10 @@ public class QuizManager : MonoBehaviour
     public GameObject quizPanel;
     public TMP_Text questionText;
     public Button[] optionButtons;
-    public GameObject[] models; // Array of models to be revealed
+    public GameObject[] models; 
     private Renderer[] modelRenderers;
     private float fadeSpeed = 0.5f;
+    private bool correctlyanswered = false;
     
 
     void Start()
@@ -32,13 +33,7 @@ public class QuizManager : MonoBehaviour
 
     void SetupQuiz()
     {
-        //questionText.text = "What is the capital of France?";
-        //optionButtons[0].GetComponentInChildren<TMP_Text>().text = "Berlin";
-        //optionButtons[1].GetComponentInChildren<TMP_Text>().text = "Paris";
-        //optionButtons[2].GetComponentInChildren<TMP_Text>().text = "Madrid";
-        //optionButtons[3].GetComponentInChildren<TMP_Text>().text = "Madrid";
-
-        // Assign button click events
+        
         optionButtons[0].onClick.AddListener(() => OnOptionSelected(false));
         optionButtons[1].onClick.AddListener(() => OnOptionSelected(true));
         optionButtons[2].onClick.AddListener(() => OnOptionSelected(false));
@@ -47,14 +42,15 @@ public class QuizManager : MonoBehaviour
 
     void OnOptionSelected(bool isCorrect)
     {
-        if (isCorrect)
+        if (isCorrect && !correctlyanswered)
         {
-            // Correct answer, start revealing models
+            
             StartCoroutine(RevealModels());
+            correctlyanswered = true;
         }
         else
         {
-            // Wrong answer, show feedback or retry logic
+            
             Debug.Log("Wrong answer!");
         }
     }

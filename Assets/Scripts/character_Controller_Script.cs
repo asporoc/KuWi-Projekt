@@ -1,55 +1,56 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Character_move : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    private Rigidbody rb;
+    CharacterController cha;
+    public float move_speed = 5f;
     private Transform cameraTransform;
     Vector3 m_EulerAngleVelocity;
 
-    private void Start()
+    void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        cha=GetComponent<CharacterController>();
         cameraTransform = GetComponentInChildren<Camera>().transform;
-        m_EulerAngleVelocity = new Vector3(0, 0, 0);
+       // m_EulerAngleVelocity = new Vector3(0, 0, 0);
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        m_EulerAngleVelocity = Vector3.zero;
 
-        
+        m_EulerAngleVelocity = Vector3.zero;
+        //move_speed=new Vector3(Input.GetAxis("Horizontal")*4,0,Input.GetAxis("Vertical")*4);
+
         if (Input.GetKey("e"))
         {
-            m_EulerAngleVelocity = new Vector3(0, 35, 0);
+            m_EulerAngleVelocity = new Vector3(0, 2, 0);
         }
         if (Input.GetKey("q"))
         {
-            m_EulerAngleVelocity = new Vector3(0, -35, 0);
+            m_EulerAngleVelocity = new Vector3(0, -2, 0);
         }
 
-        Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
+        
 
         
         Vector3 cameraForward = cameraTransform.forward;
         Vector3 cameraRight = cameraTransform.right;
 
-        
         cameraForward.y = 0;
         cameraRight.y = 0;
         cameraForward.Normalize();
         cameraRight.Normalize();
 
-        
-        Vector3 movement = (cameraForward * verticalInput + cameraRight * horizontalInput) * moveSpeed;
+        Vector3 movement = (cameraForward * verticalInput + cameraRight * horizontalInput) * move_speed;
 
-        
-        rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);
-        rb.MoveRotation(rb.rotation * deltaRotation);
+
+         cha.SimpleMove(movement);
+         this.transform.Rotate(m_EulerAngleVelocity);  
+
+
     }
 }
-

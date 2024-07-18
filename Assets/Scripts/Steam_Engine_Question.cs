@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro; // Import für textMeshPro
 
 public class QuizManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class QuizManager : MonoBehaviour
     private float fadeSpeed = 0.5f;
     private bool correctlyanswered = false;
     
+    public TextMeshProUGUI scoreText; // Referenz auf das TextMeshPro-Element
+    private int score = 0; 
 
     void Start()
     {
@@ -22,8 +25,8 @@ public class QuizManager : MonoBehaviour
             
         }
 
-        
         SetupQuiz();
+        UpdateScoreDisplay(); //Score-Anzeige initialisieren
     }
 
     void SetupQuiz()
@@ -39,7 +42,9 @@ public class QuizManager : MonoBehaviour
     {
         if (isCorrect && !correctlyanswered)
         {
-            
+            score++; // Punktzahl um 1 erhöht
+            UpdateScoreDisplay(); // Methodenaufruf
+
             StartCoroutine(RevealModels());
             correctlyanswered = true;
         }
@@ -75,4 +80,10 @@ public class QuizManager : MonoBehaviour
         
         }
     }
+        
+        void UpdateScoreDisplay()
+        {
+            scoreText.text = "Score: " + score.ToString();
+        }
+
 }

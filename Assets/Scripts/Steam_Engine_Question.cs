@@ -11,8 +11,8 @@ public class QuizManager : MonoBehaviour
     private float fadeSpeed = 0.5f;
     private bool correctlyanswered = false;
     
-    public TextMeshProUGUI scoreText; // Referenz auf das TextMeshPro-Element
-    private int score = 0; 
+    //public TextMeshProUGUI scoreText; // Referenz auf das TextMeshPro-Element
+    //private int score = 0; 
 
     void Start()
     {
@@ -26,7 +26,7 @@ public class QuizManager : MonoBehaviour
         }
 
         SetupQuiz();
-        UpdateScoreDisplay(); //Score-Anzeige initialisieren
+    //    UpdateScoreDisplay(); //Score-Anzeige initialisieren
     }
 
     void SetupQuiz()
@@ -42,8 +42,8 @@ public class QuizManager : MonoBehaviour
     {
         if (isCorrect && !correctlyanswered)
         {
-            score++; // Punktzahl um 1 erhöht
-            UpdateScoreDisplay(); // Methodenaufruf
+        //    score++; // Punktzahl um 1 erhöht
+         //   UpdateScoreDisplay(); // Methodenaufruf
 
             StartCoroutine(RevealModels());
             correctlyanswered = true;
@@ -81,9 +81,9 @@ public class QuizManager : MonoBehaviour
         }
     }
         
-        void UpdateScoreDisplay()
-        {
-            scoreText.text = "Score: " + score.ToString();
-        }
+        //void UpdateScoreDisplay()
+        //{
+        //    scoreText.text = "Score: " + score.ToString();
+        //}
 
 }

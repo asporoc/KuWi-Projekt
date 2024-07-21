@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro; // Import for TextMeshPro
+using System.IO;
+using System.Linq;
 
 public class QuizManager : MonoBehaviour
 {
@@ -13,12 +15,27 @@ public class QuizManager : MonoBehaviour
     private Renderer[] modelRenderers;
     private float fadeSpeed = 0.5f;
     private bool correctlyAnswered = false;
+    private EntryList entryList;
 
     //public TextMeshProUGUI scoreText; // Reference to the TextMeshPro element
     //private int score = 0; 
+    [System.Serializable]
+    public class Entry
+    {
+        public string name;
+        public string content;
+    }
+
+    [System.Serializable]
+    public class EntryList
+    {
+        public Entry[] entries;
+    }
+
 
     void Start()
     {
+        LoadEntries();
         Text.gameObject.SetActive(false);
 
         modelRenderers = new Renderer[models.Length];
@@ -38,6 +55,19 @@ public class QuizManager : MonoBehaviour
         SetupQuiz();
         //UpdateScoreDisplay(); // Initialize score display
     }
+    void LoadEntries()
+    {
+        string filePath = Path.Combine(Application.streamingAssetsPath, "text_data.json");
+        if (File.Exists(filePath))
+        {
+            string dataAsJson = File.ReadAllText(filePath);
+            entryList = JsonUtility.FromJson<EntryList>(dataAsJson);
+        }
+        else
+        {
+            Debug.LogError("Cannot find file!");
+        }
+    }
 
     void SetupQuiz()
     {
@@ -56,11 +86,21 @@ public class QuizManager : MonoBehaviour
 
             StartCoroutine(RevealModels());
             correctlyAnswered = true;
+
             Text.gameObject.SetActive(true);
             Question.SetActive(false);
             foreach (Button button in optionButtons)
             {
                 button.gameObject.SetActive(false);
+            }
+            var entry = entryList.entries.FirstOrDefault(e => e.name == Text.gameObject.name);
+            if (entry != null)
+            {
+                Text.text = entry.content;
+            }
+            else
+            {
+                Debug.LogError("No entry found with the name: " + Text.gameObject.name);
             }
         }
         else
@@ -80,7 +120,7 @@ public class QuizManager : MonoBehaviour
                 if (renderer != null)
                 {
                     SetAlpha(renderer, alpha);
-                    Debug.Log(alpha);
+                    //Debug.Log(alpha);
                 }
             }
             yield return null;

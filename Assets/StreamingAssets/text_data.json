@@ -1,16 +1,16 @@
 {
-    "users": [
+    "entries": [
         {
             "name": "amphora",
-            "text": "Amphoren waren im antiken Europa zentrale Transport- und Lagergefäße für Handelsgüter wie Olivenöl und Wein. In Rom belegt der Monte Testaccio, ein Hügel aus Amphorenscherben, die massive Nutzung dieser Gefäße. Funde in Mittelmeerschiffswracks zeigen ihre Bedeutung im Seehandel. Archäologisch helfen Amphoren bei der Rekonstruktion von Handelsrouten und der Wirtschafts- und Sozialgeschichte Europas.\nAuch heute werden Amphoren in Europa, etwa in Georgien, zur traditionellen Weinherstellung verwendet, was ihre kulturelle Relevanz unterstreicht."
+            "content": "Amphoren waren im antiken Europa zentrale Transport- und Lagergefäße für Handelsgüter wie Olivenöl und Wein.\nAuch heute werden Amphoren in Europa, etwa in Georgien, zur traditionellen Weinherstellung verwendet,\nwas ihre kulturelle Relevanz unterstreicht."
         },
         {
             "name": "theodolit",
-            "text": "Der Theodolit ist ein präzises Messinstrument für Winkel in horizontalen und vertikalen Ebenen, das traditionell in der Landvermessung und im Bauwesen verwendet wird. Seine Ursprünge reichen bis ins 16. Jahrhundert zurück, und sein modernes Design wurde maßgeblich in Europa entwickelt.\nDer erste bedeutende Fortschritt kam 1725 mit Jonathan Sissons Altazimut-Theodolit in Großbritannien. 1787 verbesserte Jesse Ramsden in England die Präzision durch die Einführung seiner präzisen Teilungswerkzeuge. Deutsche Ingenieure wie Johann Georg Breithaupt trugen ebenfalls zur Weiterentwicklung bei. Im 19. Jahrhundert setzte sich das Transit-Theodolit-Design durch, das auf astronomischen Transitinstrumenten basiert.\nHeute wird der Theodolit in Europa für hochpräzise geodätische Projekte und Infrastrukturentwicklungen genutzt. Moderne Totalstationen integrieren elektronische Messungen von Winkeln und Entfernungen, was die Planung und Durchführung komplexer Bauvorhaben erheblich erleichtert."
+            "content": "Der Theodolit wird traditionell in der Landvermessung und im Bauwesen verwendet.\nSeine Ursprünge reichen bis ins 16. Jahrhundert zurück, und sein modernes Design wurde maßgeblich in Europa entwickelt.\nHeute wird der Theodolit in Europa für hochpräzise geodätische Projekte und Infrastrukturentwicklungen genutzt."
         },
         {
             "name": "olivetrees",
-            "text": "Vincent van Gogh malte mindestens 15 Gemälde von Olivenbäumen während seines Aufenthalts in einer Heilanstalt in Saint-Rémy-de-Provence von Mai 1889 bis Mai 1890. Diese Werke repräsentieren den Lebenszyklus und das Göttliche, insbesondere mit Verweisen auf Christus im Garten von Gethsemane.\nVan Gogh fand in der Natur Trost, und seine Olivenbaum-Gemälde entstanden in einer Zeit emotionaler Turbulenzen, zählen jedoch zu seinen besten Arbeiten. Als bedeutender Vertreter der europäischen Kunst sind seine Werke ein wesentlicher Bestandteil des kulturellen Erbes der EU. Olivenbäume, ein Symbol der mediterranen Länder Europas, verleihen seinen Gemälden zusätzliche regionale Bedeutung."
+            "content": "Vincent van Gogh malte mindestens 15 Gemälde von Olivenbäumen während seines Aufenthalts in einer Heilanstalt in Saint-Rémy-de-Provence von Mai 1889 bis Mai 1890.Als bedeutender Vertreter der europäischen Kunst sind seine Werke ein wesentlicher Bestandteil des kulturellen Erbes der EU. Olivenbäume, ein Symbol der mediterranen Länder Europas, verleihen seinen Gemälden zusätzliche regionale Bedeutung."
         }
     ]
 }

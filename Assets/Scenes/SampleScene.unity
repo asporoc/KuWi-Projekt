@@ -2450,7 +2450,7 @@ PrefabInstance:
     - target: {fileID: 4646105544751072069, guid: 9bc95da5c8f2fbfa3bdf0ac8542b825e,
         type: 3}
       propertyPath: m_Name
-      value: OliveTreeQuestion
+      value: Question
       objectReference: {fileID: 0}
     - target: {fileID: 4648782437884985744, guid: 9bc95da5c8f2fbfa3bdf0ac8542b825e,
         type: 3}
@@ -2808,6 +2808,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -291
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646105544751072069, guid: 9bc95da5c8f2fbfa3bdf0ac8542b825e,
+        type: 3}
+      propertyPath: m_Name
+      value: Question
       objectReference: {fileID: 0}
     - target: {fileID: 4648782437884985744, guid: 9bc95da5c8f2fbfa3bdf0ac8542b825e,
         type: 3}

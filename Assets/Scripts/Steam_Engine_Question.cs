@@ -1,37 +1,46 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Import für textMeshPro
+using TMPro; // Import for TextMeshPro
 
 public class QuizManager : MonoBehaviour
 {
     public GameObject quizPanel;
     public Button[] optionButtons;
     public GameObject[] models; 
+    public TMP_Text Text;
+    public GameObject Question; // Added declaration for Question object
+
     private Renderer[] modelRenderers;
     private float fadeSpeed = 0.5f;
-    private bool correctlyanswered = false;
-    
-    //public TextMeshProUGUI scoreText; // Referenz auf das TextMeshPro-Element
+    private bool correctlyAnswered = false;
+
+    //public TextMeshProUGUI scoreText; // Reference to the TextMeshPro element
     //private int score = 0; 
 
     void Start()
     {
-        
-        modelRenderers = new MeshRenderer[models.Length];
+        Text.gameObject.SetActive(false);
+
+        modelRenderers = new Renderer[models.Length];
         for (int i = 0; i < models.Length; i++)
         {
-            modelRenderers[i] = models[i].GetComponentInChildren<MeshRenderer>();
-            SetAlpha(modelRenderers[i], 0);
-            
+            modelRenderers[i] = models[i].GetComponentInChildren<Renderer>();
+            if (modelRenderers[i] != null)
+            {
+                SetAlpha(modelRenderers[i], 0);
+            }
+            else
+            {
+                Debug.LogError("Renderer not found in model: " + models[i].name);
+            }
         }
 
         SetupQuiz();
-    //    UpdateScoreDisplay(); //Score-Anzeige initialisieren
+        //UpdateScoreDisplay(); // Initialize score display
     }
 
     void SetupQuiz()
     {
-        
         optionButtons[0].onClick.AddListener(() => OnOptionSelected(false));
         optionButtons[1].onClick.AddListener(() => OnOptionSelected(true));
         optionButtons[2].onClick.AddListener(() => OnOptionSelected(false));
@@ -40,17 +49,22 @@ public class QuizManager : MonoBehaviour
 
     void OnOptionSelected(bool isCorrect)
     {
-        if (isCorrect && !correctlyanswered)
+        if (isCorrect && !correctlyAnswered)
         {
-        //    score++; // Punktzahl um 1 erhöht
-         //   UpdateScoreDisplay(); // Methodenaufruf
+            //score++; // Increase score by 1
+            //UpdateScoreDisplay(); // Call method
 
             StartCoroutine(RevealModels());
-            correctlyanswered = true;
+            correctlyAnswered = true;
+            Text.gameObject.SetActive(true);
+            Question.SetActive(false);
+            foreach (Button button in optionButtons)
+            {
+                button.gameObject.SetActive(false);
+            }
         }
         else
         {
-            
             Debug.Log("Wrong answer!");
         }
     }
@@ -63,8 +77,11 @@ public class QuizManager : MonoBehaviour
             alpha += Time.deltaTime * fadeSpeed;
             foreach (Renderer renderer in modelRenderers)
             {
-                SetAlpha(renderer, alpha);
-                Debug.Log(alpha);
+                if (renderer != null)
+                {
+                    SetAlpha(renderer, alpha);
+                    Debug.Log(alpha);
+                }
             }
             yield return null;
         }
@@ -77,13 +94,12 @@ public class QuizManager : MonoBehaviour
             Color color = mat.color;
             color.a = Mathf.Clamp01(alpha);
             mat.color = color;
-        
         }
     }
-        
-        //void UpdateScoreDisplay()
-        //{
-        //    scoreText.text = "Score: " + score.ToString();
-        //}
 
+    //void UpdateScoreDisplay()
+    //{
+    //    scoreText.text = "Score: " + score.ToString();
+    //}
 }
+

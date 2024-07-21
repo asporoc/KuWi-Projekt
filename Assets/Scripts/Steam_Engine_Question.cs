@@ -14,6 +14,7 @@ public class QuizManager : MonoBehaviour
 
     private Renderer[] modelRenderers;
     private float fadeSpeed = 0.5f;
+
     private bool correctlyAnswered = false;
     private EntryList entryList;
 
@@ -31,6 +32,7 @@ public class QuizManager : MonoBehaviour
     {
         public Entry[] entries;
     }
+
 
 
     void Start()
@@ -136,6 +138,7 @@ public class QuizManager : MonoBehaviour
             mat.color = color;
         }
     }
+
 
     void UpdateScoreDisplay()
     {

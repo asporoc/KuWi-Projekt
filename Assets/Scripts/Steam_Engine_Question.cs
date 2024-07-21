@@ -12,7 +12,7 @@ public class QuizManager : MonoBehaviour
     private bool correctlyanswered = false;
     
     public TextMeshProUGUI scoreText; // Referenz auf das TextMeshPro-Element
-    private int score = 0; 
+    static int score = 0; 
 
     void Start()
     {
@@ -85,5 +85,7 @@ public class QuizManager : MonoBehaviour
         {
             scoreText.text = "Score: " + score.ToString();
         }
+
+        
 
 }

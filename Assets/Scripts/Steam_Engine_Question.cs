@@ -1,37 +1,78 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Import für textMeshPro
+using TMPro; // Import for TextMeshPro
+using System.IO;
+using System.Linq;
 
 public class QuizManager : MonoBehaviour
 {
     public GameObject quizPanel;
     public Button[] optionButtons;
     public GameObject[] models; 
+    public TMP_Text Text;
+    public GameObject Question; // Added declaration for Question object
+
     private Renderer[] modelRenderers;
     private float fadeSpeed = 0.5f;
-    private bool correctlyanswered = false;
-    
-    public TextMeshProUGUI scoreText; // Referenz auf das TextMeshPro-Element
-    static int score = 0; 
+
+    private bool correctlyAnswered = false;
+    private EntryList entryList;
+
+    public TextMeshProUGUI scoreText; // Reference to the TextMeshPro element
+    private int score = 0;
+    [System.Serializable]
+    public class Entry
+    {
+        public string name;
+        public string content;
+    }
+
+    [System.Serializable]
+    public class EntryList
+    {
+        public Entry[] entries;
+    }
+
+
 
     void Start()
     {
-        
-        modelRenderers = new MeshRenderer[models.Length];
+        LoadEntries();
+        Text.gameObject.SetActive(false);
+
+        modelRenderers = new Renderer[models.Length];
         for (int i = 0; i < models.Length; i++)
         {
-            modelRenderers[i] = models[i].GetComponentInChildren<MeshRenderer>();
-            SetAlpha(modelRenderers[i], 0);
-            
+            modelRenderers[i] = models[i].GetComponentInChildren<Renderer>();
+            if (modelRenderers[i] != null)
+            {
+                SetAlpha(modelRenderers[i], 0);
+            }
+            else
+            {
+                Debug.LogError("Renderer not found in model: " + models[i].name);
+            }
         }
 
         SetupQuiz();
-        UpdateScoreDisplay(); //Score-Anzeige initialisieren
+        //UpdateScoreDisplay(); // Initialize score display
+    }
+    void LoadEntries()
+    {
+        string filePath = Path.Combine(Application.streamingAssetsPath, "text_data.json");
+        if (File.Exists(filePath))
+        {
+            string dataAsJson = File.ReadAllText(filePath);
+            entryList = JsonUtility.FromJson<EntryList>(dataAsJson);
+        }
+        else
+        {
+            Debug.LogError("Cannot find file!");
+        }
     }
 
     void SetupQuiz()
     {
-        
         optionButtons[0].onClick.AddListener(() => OnOptionSelected(false));
         optionButtons[1].onClick.AddListener(() => OnOptionSelected(true));
         optionButtons[2].onClick.AddListener(() => OnOptionSelected(false));
@@ -40,17 +81,32 @@ public class QuizManager : MonoBehaviour
 
     void OnOptionSelected(bool isCorrect)
     {
-        if (isCorrect && !correctlyanswered)
+        if (isCorrect && !correctlyAnswered)
         {
-            score++; // Punktzahl um 1 erhöht
-            UpdateScoreDisplay(); // Methodenaufruf
+            //score++; // Increase score by 1
+            //UpdateScoreDisplay(); // Call method
 
             StartCoroutine(RevealModels());
-            correctlyanswered = true;
+            correctlyAnswered = true;
+
+            Text.gameObject.SetActive(true);
+            Question.SetActive(false);
+            foreach (Button button in optionButtons)
+            {
+                button.gameObject.SetActive(false);
+            }
+            var entry = entryList.entries.FirstOrDefault(e => e.name == Text.gameObject.name);
+            if (entry != null)
+            {
+                Text.text = entry.content;
+            }
+            else
+            {
+                Debug.LogError("No entry found with the name: " + Text.gameObject.name);
+            }
         }
         else
         {
-            
             Debug.Log("Wrong answer!");
         }
     }
@@ -63,8 +119,11 @@ public class QuizManager : MonoBehaviour
             alpha += Time.deltaTime * fadeSpeed;
             foreach (Renderer renderer in modelRenderers)
             {
-                SetAlpha(renderer, alpha);
-                Debug.Log(alpha);
+                if (renderer != null)
+                {
+                    SetAlpha(renderer, alpha);
+                    //Debug.Log(alpha);
+                }
             }
             yield return null;
         }
@@ -77,15 +136,7 @@ public class QuizManager : MonoBehaviour
             Color color = mat.color;
             color.a = Mathf.Clamp01(alpha);
             mat.color = color;
-        
         }
     }
-        
-        void UpdateScoreDisplay()
-        {
-            scoreText.text = "Score: " + score.ToString();
-        }
-
-        
 
 }

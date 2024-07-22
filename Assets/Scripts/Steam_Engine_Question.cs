@@ -19,7 +19,7 @@ public class QuizManager : MonoBehaviour
     private EntryList entryList;
 
     public TextMeshProUGUI scoreText; // Reference to the TextMeshPro element
-    private int score = 0;
+    static int score = 0;
     [System.Serializable]
     public class Entry
     {
@@ -55,7 +55,7 @@ public class QuizManager : MonoBehaviour
         }
 
         SetupQuiz();
-        //UpdateScoreDisplay(); // Initialize score display
+        UpdateScoreDisplay(); // Initialize score display
     }
     void LoadEntries()
     {
@@ -83,8 +83,8 @@ public class QuizManager : MonoBehaviour
     {
         if (isCorrect && !correctlyAnswered)
         {
-            //score++; // Increase score by 1
-            //UpdateScoreDisplay(); // Call method
+            score++; // Increase score by 1
+            UpdateScoreDisplay(); // Call method
 
             StartCoroutine(RevealModels());
             correctlyAnswered = true;
@@ -138,5 +138,10 @@ public class QuizManager : MonoBehaviour
             mat.color = color;
         }
     }
+    void UpdateScoreDisplay()
+        {
+            scoreText.text = "Score: " + score.ToString();
+        }
+
 
 }

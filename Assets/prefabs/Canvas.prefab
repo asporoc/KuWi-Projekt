@@ -1460,7 +1460,7 @@ RectTransform:
   m_GameObject: {fileID: 8501016287051109784}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -9.603}
-  m_LocalScale: {x: 0.002, y: 0.005, z: 1}
+  m_LocalScale: {x: 0.003, y: 0.005, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4231966810385037299}
@@ -1537,6 +1537,9 @@ MonoBehaviour:
   - {fileID: 5896911326389525766}
   models:
   - {fileID: 0}
+  Text: {fileID: 0}
+  Question: {fileID: 0}
+  scoreText: {fileID: 0}
 --- !u!1001 &3519536013281266927
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1589,6 +1592,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7112386885683367911, guid: b683025e7c67901b0b8ab4599f61de18,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.003
       objectReference: {fileID: 0}
     - target: {fileID: 7112386885683367911, guid: b683025e7c67901b0b8ab4599f61de18,
         type: 3}
